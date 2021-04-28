@@ -9,3 +9,8 @@ def index(request):
 @login_required
 def inbox(request):
     return render(request, 'website/pages/inbox.html')
+
+def login(request):
+    if request.user.is_authenticated :
+        return redirect('inbox')
+    return render(request, 'website/pages/login.html')
