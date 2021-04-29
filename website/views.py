@@ -14,3 +14,7 @@ def login(request):
     if request.user.is_authenticated :
         return redirect('inbox')
     return render(request, 'website/pages/login.html')
+
+def share(request):
+    # TODO: If the id is same as requsted user then redirect to inbox page
+    return render(request, 'website/pages/share.html')
