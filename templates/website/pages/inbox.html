@@ -32,7 +32,7 @@
                     <hr>
                     <div class="container">
                         <div class="input-group">
-                            <input style="font-size: 18px;" type="text" name="shareURL" id="shareURL" class="form-control" value="http://quizprank.xyz/message.php?id=p2y1qcg8">
+                            <input style="font-size: 18px;" type="text" name="shareURL" id="shareURL" class="form-control" value="http://{{request.get_host}}/share?id={{user.username}}">
                             <div class="input-group-append">
                               <span class="input-group-text"><i class="fa fa-clone"></i></span>
                             </div>
@@ -40,21 +40,24 @@
                         <hr>
                         <div class="row mb-2">
                             <div class="col-md-6 col-sm-6 col-xs-6">
-                                <div class="card card-body text-center text-white py-1" style="background-color: #1DEC40;">
-                                    <i class="fa fa-whatsapp fa-2x"></i>
-                                    <hr class="my-1">
-                                    <p class="lead m-0">Whatsapp Story</p>
-                                </div>
+                                <a style="text-decoration: none;" href="whatsapp://send?text=%E2%9C%89%EF%B8%8F%F0%9F%92%AC%F0%9F%92%8C%0D%0ASend+Secret+Message+to+%2A{{user.first_name}}%2A%0D%0A%F0%9F%A4%A9+I+will+never+know+who+sent+me+which+message+%F0%9F%A4%94%0D%0AIt%27s+fun%2C+Try+here+%F0%9F%91%89+http://{{request.get_host}}/share?id={{user.username}}" data-action="share/whatsapp/share" target="_blank"  >
+                                    <div class="card card-body text-center text-white py-1" style="background-color: #1DEC40;">
+                                        <i class="fa fa-whatsapp fa-2x"></i>
+                                        <hr class="my-1">
+                                        <p class="lead m-0">Whatsapp Story</p>
+                                    </div>
+                                </a>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6">
-                                <div class="card card-body text-center text-white py-1" style="background-color: #0084B4;">
-                                    <i class="fa fa-twitter fa-2x"></i>
-                                    <hr class="my-1">
-                                    <p class="lead m-0">Twitter</p>
-                                </div>
+                                <a href="https://twitter.com/intent/tweet?hashtags=msgprank&&text=%E2%9C%89%EF%B8%8F%F0%9F%92%AC%F0%9F%92%8C%0D%0ASend+Secret+Message+to+%2A{{user.first_name}}%2A%0D%0A%F0%9F%A4%A9+I+will+never+know+who+sent+me+which+message+%F0%9F%A4%94%0D%0AIt%27s+fun%2C+Try+here+%F0%9F%91%89+&url=http://{{request.get_host}}/message.php?id={{user.username}}" target="_blank">
+                                    <div class="card card-body text-center text-white py-1" style="background-color: #0084B4;">
+                                        <i class="fa fa-twitter fa-2x"></i>
+                                        <hr class="my-1">
+                                        <p class="lead m-0">Twitter</p>
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                        <div class="btn btn-primary btn-block"><i class="fa fa-share"></i> More Places to Share</div>
                         <a href="#timeline" class="btn btn-primary btn-block"><i class="fa fa-chevron-circle-down"></i> Check Timeline</a>
                         <button role="button" data-toggle="modal" data-target="#settingsModal" class="btn btn-primary btn-block"><i class="fa fa-cog"></i> Settings</button>
                     </div>
@@ -66,24 +69,23 @@
                 <div class="card card-body">
                     <h4 class="text-center">Annoymous Message Timeline</h4>
                     <hr>
+                    {% if messages|length > 0 %}
+                        {% for message in messages %}
+                            <div class="card card-body bg-info text-white my-1">
+                                <h5>{{message.message}}</h5>
+                                <br>
+                                <p class="m-0">Msg prank</p>
+                                <span class="delete-button" data-id="{{message.id}}"><i class="fa fa-trash"></i></span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
                     <div class="card card-body bg-dark text-white my-1">
-                        <h5>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora, nemo.</h5>
+                        <h5>Currently You Don't have any messages.</h5>
                         <br>
-                        <p class="m-0">Msg_prank.com</p>
-                        <span style="background-color: #fff;color: #000; width: 30px;height: 30px;display:flex;justify-content: center;align-items: center; border-radius: 50%; font-size: 20px;position: absolute;bottom: 10px;right: 10px;"><i class="fa fa-trash"></i></span>
+                        <p class="m-0">Msg prank</p>{{message.id}}
+                        <!-- <span class="delete-button"><i class="fa fa-trash"></i></span> -->
                     </div>
-                    <div class="card card-body bg-danger text-white my-1">
-                        <h5>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora, nemo.</h5>
-                        <br>
-                        <p class="m-0">Msg_prank.com</p>
-                        <span style="background-color: #fff;color: #000; width: 30px;height: 30px;display:flex;justify-content: center;align-items: center; border-radius: 50%; font-size: 20px;position: absolute;bottom: 10px;right: 10px;"><i class="fa fa-trash"></i></span>
-                    </div>
-                    <div class="card card-body bg-info text-white my-1">
-                        <h5>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora, nemo.</h5>
-                        <br>
-                        <p class="m-0">Msg_prank.com</p>
-                        <span style="background-color: #fff;color: #000; width: 30px;height: 30px;display:flex;justify-content: center;align-items: center; border-radius: 50%; font-size: 20px;position: absolute;bottom: 10px;right: 10px;"><i class="fa fa-trash"></i></span>
-                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -132,9 +134,46 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Delete Account</button>
+          <a href="{% url 'deleteAccount' %}" class="btn btn-danger"><i class="fa fa-trash"></i> Delete Account</a>
         </div>
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block js %}
+<script>
+    const deleteButtons = document.querySelectorAll('.delete-button')
+    //console.log(deleteButtons);
+
+    const deleteMessage = async(e) => {
+        let node = e.target
+        if (e.target.className === 'fa fa-trash'){
+            node = e.target.parentNode
+        }
+        const messageId = node.dataset.id;
+        console.log(messageId);
+
+        let res = await fetch(`/delete-message?id=${messageId}`);
+        let data = await res.json()
+        if(data['success']){
+            node.parentNode;
+            let alert = document.createElement('div');
+            alert.className = 'mt-1 alert alert-success'
+            alert.textContent = 'Message successfully deleted.'
+
+            //node.parentNode.parentNode.parentGuest.parentNode.insertBefore(childGuest, parentGuest.nextSibling);
+            //console.log(node.parentNode.parentNode);
+            node.parentNode.parentNode.insertBefore(alert, node.parentNode)
+            node.parentNode.parentNode.removeChild(node.parentNode)
+            
+        }
+
+    }
+
+    deleteButtons.forEach(deleteButton => {
+        deleteButton.addEventListener('click', deleteMessage)
+    })
+
+</script>
 {% endblock %}

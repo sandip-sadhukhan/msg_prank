@@ -7,12 +7,13 @@
             <div class="col-md-6 col-sm-12 mx-auto">
                 <div class="card card-body">
                     <h5>
-                        Message {your friend} Secretly 😉, they will never know who messaged them.😅
+                        Message {{curr_user.first_name}} Secretly 😉, He/She will never know who messaged them.😅
                     </h5>
                     <hr>
-                    <form action="#" method="post">
+                    <form action="{{request.get_full_path}}" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
-                            <textarea class="form-control" name="message" id="message" rows="4" placeholder="Write your secret message here"></textarea>
+                            <textarea class="form-control" name="message" id="message" rows="4" placeholder="Write your secret message here" autofocus required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Send Secret Message 🤞</button>
                     </form>

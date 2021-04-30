@@ -7,4 +7,6 @@ urlpatterns = [
     path('login/', views.login, name="login"),
     path('logout/', views.logout, name="logout"),
     path('share/', views.share, name="share"),
+    path('delete-message/', views.deleteMessage, name="deleteMessage"),
+    path('delete-account/', views.deleteAccount, name="deleteAccount"),
 ]
