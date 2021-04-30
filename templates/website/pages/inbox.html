@@ -13,10 +13,10 @@
                         </div>
                         <div class="col-md-6 text-center my-1">
                             <p class="mt-0 mb-1" style="font-size: 17px;font-weight: 700;">
-                                User ID - <span class="badge badge-primary" style="font-size: 18px;letter-spacing: 1px;">lsdfkjks</span>
+                                User ID - <span class="badge badge-primary" style="font-size: 18px;letter-spacing: 1px;">{{user.username}}</span>
                             </p>
                             <p class="m-0" style="font-size: 17px;font-weight: 700;">
-                                Pin - <span class="badge badge-primary" style="font-size: 18px;letter-spacing: 1px;">344333</span>
+                                Pin - <span class="badge badge-primary" style="font-size: 18px;letter-spacing: 1px;">{{user.last_name}}</span>
                             </p>
                         </div>
                     </div>
@@ -27,11 +27,10 @@
             <div class="col-md-5 col-sm-12 mx-auto">
                 <div class="card card-body">
                     <h5>
-                        Share this link with your friends and collect Anonymous Messages
+                        Dear {{user.first_name}}, Share this link with your friends and collect Anonymous Messages
                     </h5>
                     <hr>
                     <div class="container">
-                        
                         <div class="input-group">
                             <input style="font-size: 18px;" type="text" name="shareURL" id="shareURL" class="form-control" value="http://quizprank.xyz/message.php?id=p2y1qcg8">
                             <div class="input-group-append">
@@ -105,13 +104,12 @@
           </button>
         </div>
         <div class="modal-body">
-            Delete your account permanently.
-            <br>
-            After clicking delete account button, your data will be deleted from our servers.
+            Before logging out please take screenshot of the login credentials like PIN and ID {Top of the page}. <br>
+            You need them to login again. PIN cannot be restored.
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Log out</button>
+            <a href="{% url 'logout' %}" class="btn btn-primary">Log out</a>
         </div>
       </div>
     </div>
@@ -128,8 +126,9 @@
           </button>
         </div>
         <div class="modal-body">
-            Before logging out please take screenshot of the login credentials like PIN and ID {Top of the page}. <br>
-            You need them to login again. PIN cannot be restored.
+            Delete your account permanently.
+            <br>
+            After clicking delete account button, your data will be deleted from our servers.
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>

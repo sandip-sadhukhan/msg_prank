@@ -10,7 +10,8 @@
                         Login to your account
                     </h2>
                     <hr>
-                    <form action="#" method="post">
+                    <form action="{% url 'login' %}" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="userid" class="lead">Your ID</label>
                             <input type="text" class="form-control" name="userid" id="userid" placeholder="Enter user ID" required autofocus>
@@ -28,4 +29,11 @@
         </div>
     </div>
 </section>
+{% endblock %}
+{% block js %}
+    {% if error %}
+        <script>
+            alert("{{error}}")
+        </script>
+    {% endif %}
 {% endblock %}

@@ -9,23 +9,23 @@
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
             <li class="nav-item mx-2">
-                <a class="nav-link btn btn-sm btn-outline-light text-light py-1" href="{% url 'inbox' %}">
+                <a class="nav-link btn btn-sm btn-outline-light py-1" href="{% url 'inbox' %}">
                     Inbox
                 </a>
                 </li>
                 <li class="nav-item mx-2">
-                <a class="nav-link btn btn-sm btn-outline-light text-light py-1" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="nav-link btn btn-sm btn-outline-light py-1" href="#" data-toggle="modal" data-target="#logoutModal">
                     Log out
                 </a>
                 </li>
             {% else %}
             <li class="nav-item mx-2">
-            <a class="nav-link btn btn-sm btn-outline-light text-light py-1" href="{% url 'index' %}">
+            <a class="nav-link btn btn-sm btn-outline-light py-1" href="{% url 'index' %}">
                 Create Account
             </a>
             </li>
             <li class="nav-item mx-2">
-            <a class="nav-link btn btn-sm btn-outline-light text-light py-1" href="#">
+            <a class="nav-link btn btn-sm btn-outline-light py-1" href="{% url 'login' %}">
                 Login
             </a>
             </li>

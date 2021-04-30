@@ -16,7 +16,8 @@
                         You can never know who messaged you!🔮
                     </p>
                     <hr>
-                    <form action="#" method="post">
+                    <form action="{% url 'index' %}" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="name" class="lead">Enter your name</label>
                             <input type="text" class="form-control" name="name" placeholder="Nickname" required autofocus>
