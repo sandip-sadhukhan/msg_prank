@@ -34,7 +34,7 @@
                         <div class="input-group">
                             <input style="font-size: 18px;" type="text" name="shareURL" id="shareURL" class="form-control" value="http://{{request.get_host}}/share?id={{user.username}}">
                             <div class="input-group-append">
-                              <span class="input-group-text"><i class="fa fa-clone"></i></span>
+                              <span class="input-group-text" id="copytext" style="cursor: pointer;"><i class="fa fa-clone"></i></span>
                             </div>
                         </div>
                         <hr>
@@ -173,6 +173,21 @@
 
     deleteButtons.forEach(deleteButton => {
         deleteButton.addEventListener('click', deleteMessage)
+    })
+
+    // Copy text
+    document.getElementById('copytext').addEventListener('click', () => {
+        var copyText = document.getElementById("shareURL");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        /* Alert the copied text */
+        alert("Copied the url");
     })
 
 </script>
