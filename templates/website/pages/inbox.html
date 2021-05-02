@@ -1,5 +1,11 @@
 {% extends 'website/base.html' %}
 {% load static %}
+{% block metatags %}
+    <meta name="vapid-key" content="{{ vapid_key }}">
+    {% if user.id %}
+        <meta name="user_id" content="{{ user.id }}">
+    {% endif %}
+{% endblock %}
 {% block title %}💌 Inbox{% endblock %}
 {% block content %}
 <section id="inbox">
@@ -191,4 +197,6 @@
     })
 
 </script>
+
+<script src="{% static '/js/registerSw.js' %}"></script>
 {% endblock %}

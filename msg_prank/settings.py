@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website.apps.WebsiteConfig',
+    'webpush',
 ]
 
 MIDDLEWARE = [
@@ -89,6 +90,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+WEBPUSH_SETTINGS = {
+   "VAPID_PUBLIC_KEY": "BGUMEPNV2K5fO8GqPWB5RYJyaCI7VEvs7dDB1cgOJCLdtn24OCvNBVXyQHeDBpoCkDEaUAGckcSCJRMVOQ7EnUU",
+   "VAPID_PRIVATE_KEY": "lZylG7ZP68Bwvg1zTImNpkDiu3hi1zzFW2FhX9k5j-w",
+   "VAPID_ADMIN_EMAIL": "sandippakhanna2@gmail.com"
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

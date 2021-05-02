@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -7,6 +7,10 @@ from django.contrib.auth import logout as auth_logout
 from .utils import generate_pin, generate_unique_username
 from django.http import HttpResponse, JsonResponse
 from .models import Message
+from django.views.decorators.csrf import csrf_exempt
+from webpush import send_user_notification
+import json
+from django.conf import settings
 
 def index(request):
     if request.user.is_authenticated :
@@ -38,7 +42,10 @@ def index(request):
 @login_required
 def inbox(request):
     messages = Message.objects.filter(user=request.user)
-    context = {'messages': messages}
+    webpush_settings = getattr(settings, 'WEBPUSH_SETTINGS', {})
+    vapid_key = webpush_settings.get('VAPID_PUBLIC_KEY')
+    user = request.user
+    context = {'messages': messages, user: user, 'vapid_key': vapid_key}
     return render(request, 'website/pages/inbox.html', context)
 
 def login(request):
@@ -86,6 +93,9 @@ def share(request):
             # create msg
             Message.objects.create(user=user, message=message)
             context = {'msg': '👍 Message Sent Successfully'}
+            # push notification
+            payload = {'head': f'{user.first_name}, you got a new message', 'body': message}
+            send_user_notification(user=user, payload=payload, ttl=1000)
             return render(request, 'website/pages/index.html', context)
 
     context = {'curr_user': user}
